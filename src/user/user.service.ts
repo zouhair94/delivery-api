@@ -49,7 +49,7 @@ export class UserService {
   }
   async findAll() {
     try {
-      return;
+      return await this.User.find({});
     } catch (error) {
       console.error(error);
     }
