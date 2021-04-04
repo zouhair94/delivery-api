@@ -32,7 +32,17 @@ export class UserService {
   }
   async login(password: string, email: string) {
     try {
-      return;
+      const user = await this.User.findOne({
+        email,
+      });
+      if (user) {
+        const checkPass = await bcrypt.compare(password, user.password);
+        if (checkPass) {
+          return await this.jwtService.signAsync({ email, _id: user._id });
+        }
+        throw new GraphQLError('Wrong Password.');
+      }
+      throw new GraphQLError("E-mail doesn't exist.");
     } catch (error) {
       console.error(error);
     }
