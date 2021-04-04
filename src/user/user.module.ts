@@ -3,10 +3,9 @@ import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from './user.schema';
-import * as bcrypt from 'bcrypt';
+
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import {} from 'jwtModule';
 
 @Module({
   imports: [

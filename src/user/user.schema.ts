@@ -38,6 +38,14 @@ export class User {
   @Field({ nullable: true })
   @Prop()
   token: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  createdAt: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  updatedAt: string;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);
