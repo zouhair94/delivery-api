@@ -19,7 +19,7 @@ export class UserService {
         email: data.email,
       });
       if (isUser) {
-        throw new GraphQLError('This account already exists.');
+        return new GraphQLError('This account already exists.');
       }
 
       const salt = await bcrypt.genSalt();
@@ -40,16 +40,16 @@ export class UserService {
         if (checkPass) {
           return await this.jwtService.signAsync({ email, _id: user._id });
         }
-        throw new GraphQLError('Wrong Password.');
+        return new GraphQLError('Wrong Password.');
       }
-      throw new GraphQLError("E-mail doesn't exist.");
+      return new GraphQLError("E-mail doesn't exist.");
     } catch (error) {
       console.error(error);
     }
   }
   async findAll() {
     try {
-      return await this.User.find({});
+      return await this.User.find({}).exec();
     } catch (error) {
       console.error(error);
     }

@@ -1,0 +1,36 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: String!
+  name: String!
+  surname: String!
+  email: String!
+  password: String!
+  phone: String!
+  role: String!
+  token: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  findAllUser: [User!]!
+}
+
+type Mutation {
+  createUser(InputUserDto: InputUserDto!): User!
+  login(email: String!, password: String!): String!
+}
+
+input InputUserDto {
+  name: String!
+  surname: String!
+  email: String!
+  password: String!
+  phone: String!
+  role: String!
+  token: String
+  createdAt: String = "2021-04-04T22:23:21.655Z"
+}

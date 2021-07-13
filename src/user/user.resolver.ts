@@ -17,8 +17,11 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => User)
-  async login(@Args('password') password, @Args('email') email) {
+  @Mutation(() => String)
+  async login(
+    @Args('password') password: string,
+    @Args('email') email: string,
+  ) {
     try {
       return await this.user.login(password, email);
     } catch (error) {

@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from './user.schema';
-
+import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
@@ -24,7 +24,7 @@ import { PassportModule } from '@nestjs/passport';
       signOptions: { expiresIn: '2days' },
     }),
   ],
-  providers: [UserService, UserResolver],
+  providers: [UserService, UserResolver, JwtStrategy],
   exports: [JwtModule, UserService, UserResolver],
 })
 export class UserModule {}

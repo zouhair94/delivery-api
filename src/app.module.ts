@@ -10,6 +10,8 @@ import { DeliveryStatusModule } from './delivery-status/delivery-status.module';
 import { LocationModule } from './location/location.module';
 import { join } from 'path';
 import { LogModule } from './log/log.module';
+import { OrderModule } from './order/order.module';
+import { AdressModule } from './adress/adress.module';
 
 @Module({
   imports: [
@@ -18,13 +20,14 @@ import { LogModule } from './log/log.module';
       debug: true,
       playground: true,
     }),
-    MongooseModule.forRoot('mongodb://localhost/delivery'),
+    MongooseModule.forRoot('mongodb://localhost:27019/delivery'),
     UserModule,
     AdressModule,
     DeliveryModule,
     DeliveryStatusModule,
     LocationModule,
     LogModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

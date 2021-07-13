@@ -2,49 +2,37 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type OrderDocument = Order & Document;
 
 @ObjectType()
 @Schema()
-export class User {
+export class Order {
   @Field(() => String)
   _id: Types.ObjectId;
 
   @Field({ nullable: false })
   @Prop({ required: true })
-  name: string;
+  title: string;
 
   @Field({ nullable: false })
   @Prop({ required: true })
-  surname: string;
-
-  @Field({ nullable: false })
-  @Prop({ required: true, unique: true })
-  email: string;
+  description: string;
 
   @Field({ nullable: false })
   @Prop({ required: true })
-  password: string;
+  from: Types.ObjectId;
 
   @Field({ nullable: false })
   @Prop({ required: true })
-  phone: string;
+  to: Types.ObjectId;
+  
+  @Field({ nullable: false })
+  @Prop({ required: true })
+  orderNumber: number;
 
   @Field({ nullable: false })
   @Prop({ required: true })
-  role: string;
-
-  @Field({ nullable: true })
-  @Prop()
-  token: string;
-
-  @Field({ nullable: true })
-  @Prop()
-  createdAt: string;
-
-  @Field({ nullable: true })
-  @Prop()
-  updatedAt: string;
+  by: Types.ObjectId;
 }
 
-export const userSchema = SchemaFactory.createForClass(User);
+export const OrderSchema = SchemaFactory.createForClass(Order);
