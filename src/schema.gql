@@ -9,19 +9,77 @@ type User {
   email: String!
   password: String!
   phone: String!
+  companyId: String!
   role: String!
   token: String
   createdAt: String
   updatedAt: String
 }
 
+type Adress {
+  _id: String!
+  title: String!
+  address: String!
+  zipCode: String
+  lat: String
+  lng: String
+  by: String!
+}
+
+type DeliverySta {
+  _id: String!
+  delivery: String!
+  status: Boolean!
+}
+
+type Location {
+  _id: String!
+  lat: String!
+  lng: String!
+  by: String!
+  createdAt: String!
+}
+
+type Order {
+  _id: String!
+  title: String!
+  description: String!
+  from: String!
+  to: String!
+  orderNumber: Float!
+  by: String!
+}
+
 type Query {
   findAllUser: [User!]!
+  totalUsers: Float!
+  findUser(id: String!): User!
+  getAllAdress: [Adress!]!
+  getAddressByUser: [Adress!]!
+  getAddress(id: String!): Adress!
+  getTotalAdress: Float!
+  getStatus(id: String!): DeliverySta!
+  getLocation(id: String!): Location!
+  getLocations(id: String!): [Location!]!
+  getAllOrders: [Order!]!
+  getOrders(id: String!): [Order!]!
+  getOrder(id: String!): Order!
+  getMonthCount(date: String!): Float!
 }
 
 type Mutation {
   createUser(InputUserDto: InputUserDto!): User!
   login(email: String!, password: String!): String!
+  updateUser(data: UpdateUserDto!, id: String!): User!
+  createAddress(addressInput: inputAddress!): Adress!
+  updateAddress(addressInput: inputAddress!, id: String!): Adress!
+  removeAddress(id: String!): Adress!
+  setStatus(StatusInp: StatusInp!): DeliverySta!
+  updateStatus(id: String!): DeliverySta!
+  addLocation(inputLocation: inputLocation!): Location!
+  addOrder(orderInput: inputOrderDto!): Order!
+  updateOrder(orderInput: inputOrderDto!, id: String!): Order!
+  removeOrder(id: String!): Order!
 }
 
 input InputUserDto {
@@ -32,5 +90,46 @@ input InputUserDto {
   phone: String!
   role: String!
   token: String
-  createdAt: String = "2021-04-04T22:23:21.655Z"
+  createdAt: String = "2021-07-29T18:17:01.273Z"
+}
+
+input UpdateUserDto {
+  name: String
+  surname: String
+  email: String
+  phone: String
+  role: String
+  companyId: String
+}
+
+input inputAddress {
+  title: String!
+  address: String!
+  by: String!
+  zipCode: Float
+  lat: Float
+  lng: Float
+}
+
+input StatusInp {
+  delivery: String!
+  status: Boolean!
+}
+
+input inputLocation {
+  by: String!
+  lng: Float!
+  lat: Float!
+  createdAt: String!
+}
+
+input inputOrderDto {
+  title: String!
+  description: String!
+  from: String!
+  to: String!
+  orderNumber: Float!
+  by: String!
+  createdAt: String!
+  editedAt: String!
 }

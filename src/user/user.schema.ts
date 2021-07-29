@@ -29,6 +29,10 @@ export class User {
   @Field({ nullable: false })
   @Prop({ required: true })
   phone: string;
+  
+  @Field({ nullable: false })
+  @Prop({ required: true })
+  companyId: string;
 
   @Field({ nullable: false })
   @Prop({ required: true })

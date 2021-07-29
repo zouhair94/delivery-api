@@ -24,15 +24,19 @@ export class OrderService {
     return await this.Order.findByIdAndRemove(id);
   }
 
-  async getAllOrders(){
+  async getAllOrders() {
     return await this.Order.find({});
   }
 
-  async getOrders(id){
+  async getOrders(id) {
     return await this.Order.find({ by: id });
   }
 
-  async getOrder(id){
+  async getOrder(id) {
     return await this.Order.findById(id);
+  }
+
+  async orderTotal(date) {
+    return await this.Order.count({ createdAt: { $gte: date } });
   }
 }

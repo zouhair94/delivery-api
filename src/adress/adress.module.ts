@@ -17,6 +17,6 @@ import { AddressResolver } from './adress.resolver';
   ],
   controllers: [],
   providers: [AdressService, AddressResolver],
-  exports: [AddressResolver]
+  exports: [AddressResolver],
 })
 export class AdressModule {}

@@ -11,7 +11,7 @@ import { LocationModule } from './location/location.module';
 import { join } from 'path';
 import { LogModule } from './log/log.module';
 import { OrderModule } from './order/order.module';
-import { AdressModule } from './adress/adress.module';
+import { DelivryStatusResolver } from './delivry-status/delivry-status.resolver';
 
 @Module({
   imports: [
@@ -30,6 +30,6 @@ import { AdressModule } from './adress/adress.module';
     OrderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DelivryStatusResolver],
 })
 export class AppModule {}

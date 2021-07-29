@@ -1,6 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { InputUserDto } from './inputs-user.dto';
+import { GraphQLError } from 'graphql';
+import { InputUserDto, UpdateUserDto } from './inputs-user.dto';
 import { GqlAuthGuard } from './user.guard';
 import { User } from './user.schema';
 import { UserService } from './user.service';
@@ -25,7 +26,20 @@ export class UserResolver {
     try {
       return await this.user.login(password, email);
     } catch (error) {
-      console.error(error);
+      return error
+    }
+  }
+
+  @Mutation(() => User)
+  @UseGuards(GqlAuthGuard)
+  async updateUser(
+    @Args('id') id: string,
+    @Args('data') data: UpdateUserDto,
+  ) {
+    try {
+      return await this.user.updateUser(id, data)
+    } catch (error) {
+      return error
     }
   }
 
@@ -36,6 +50,26 @@ export class UserResolver {
       return await this.user.findAll();
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  @Query(() => Number)
+  @UseGuards(GqlAuthGuard)
+  async totalUsers() {
+    try {
+      return await this.user.totalUsers();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  @Query(() => User)
+  @UseGuards(GqlAuthGuard)
+  async findUser(@Args('id') id: string) {
+    try {
+      return await this.user.userById(id);
+    } catch (error) {
+      return new GraphQLError(error);
     }
   }
 }

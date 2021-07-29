@@ -54,4 +54,29 @@ export class UserService {
       console.error(error);
     }
   }
+
+  async deleteUser(id){
+      try {
+          return await this.User.findOneAndDelete(id);
+      } catch (error) {
+        return new GraphQLError("User no existing.");
+      }
+  } 
+
+  async userById(id) {
+    return await this.User.findOne({ _id: id }).exec();
+  }
+
+
+  async updateUser(id, data){
+    return await this.User.findByIdAndUpdate(id,data);
+  }
+
+  async totalUsers() {
+    try {
+      return await this.User.count().exec();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

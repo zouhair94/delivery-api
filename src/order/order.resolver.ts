@@ -1,4 +1,7 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { argsToArgsConfig } from 'graphql/type/definition';
+import { GqlAuthGuard } from '../user/user.guard';
 import { inputOrderDto } from './order.dto';
 import { Order, OrderSchema } from './order.schema';
 import { OrderService } from './order.service';
@@ -7,33 +10,46 @@ import { OrderService } from './order.service';
 export class OrderResolver {
   constructor(private readonly orderServ: OrderService) {}
 
-  @Mutation()
-  async addOrder(data: inputOrderDto) {
+  @Mutation(() => Order)
+  @UseGuards(GqlAuthGuard)
+  async addOrder(@Args('orderInput') data: inputOrderDto) {
     return await this.orderServ.addNewOrder(data);
   }
 
-  @Mutation()
-  async updateOrder(id, data: inputOrderDto) {
+  @Mutation(() => Order)
+  @UseGuards(GqlAuthGuard)
+  async updateOrder(
+    @Args('id') id: string,
+    @Args('orderInput') data: inputOrderDto,
+  ) {
     return await this.orderServ.updateOrder(id, data);
   }
 
-  @Mutation()
-  async removeOrder(id) {
+  @Mutation(() => Order)
+  @UseGuards(GqlAuthGuard)
+  async removeOrder(@Args('id') id: string) {
     return await this.orderServ.removeOrder(id);
   }
 
   @Query(() => [Order])
+  @UseGuards(GqlAuthGuard)
   async getAllOrders() {
     return await this.orderServ.getAllOrders();
   }
 
   @Query(() => [Order])
-  async getOrders(id) {
+  @UseGuards(GqlAuthGuard)
+  async getOrders(@Args('id') id: string) {
     return await this.orderServ.getOrders(id);
   }
 
   @Query(() => Order)
-  async getOrder(id) {
+  async getOrder(@Args('id') id: string) {
     return await this.orderServ.getOrder(id);
+  }
+
+  @Query(() => Number)
+  async getMonthCount(@Args('date') date: string) {
+    return await this.orderServ.orderTotal(date);
   }
 }

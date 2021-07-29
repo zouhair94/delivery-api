@@ -13,6 +13,8 @@ export class inputOrderDto {
   @Field()
   orderNumber?: number;
   @Field()
+  by: string;
+  @Field()
   createdAt?: string;
   @Field()
   editedAt?: string;

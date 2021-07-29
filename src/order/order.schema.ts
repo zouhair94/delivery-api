@@ -18,11 +18,11 @@ export class Order {
   @Prop({ required: true })
   description: string;
 
-  @Field({ nullable: false })
+  @Field(() => String, { nullable: false })
   @Prop({ required: true })
   from: Types.ObjectId;
 
-  @Field({ nullable: false })
+  @Field(() => String, { nullable: false })
   @Prop({ required: true })
   to: Types.ObjectId;
   
@@ -30,7 +30,7 @@ export class Order {
   @Prop({ required: true })
   orderNumber: number;
 
-  @Field({ nullable: false })
+  @Field(() => String, { nullable: false })
   @Prop({ required: true })
   by: Types.ObjectId;
 }

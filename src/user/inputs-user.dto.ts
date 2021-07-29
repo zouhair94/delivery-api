@@ -26,6 +26,29 @@ export class InputUserDto {
   createdAt: string = new Date().toISOString();
 }
 
+@InputType()
+export class UpdateUserDto {
+  @Field({ nullable: true })
+  name: string;
+
+  @Field({ nullable: true })
+  surname: string;
+
+  @Field({ nullable: true })
+  email: string;
+
+  @Field({ nullable: true })
+  phone: string;
+
+  @Field({ nullable: true })
+  role: string;
+
+  @Field({ nullable: true })
+  companyId: string;
+
+  
+}
+
 export class updateUserDto extends PartialType(
   OmitType(InputUserDto, ['createdAt', 'password'] as const),
 ) {

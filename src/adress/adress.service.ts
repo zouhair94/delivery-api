@@ -50,4 +50,8 @@ export class AdressService {
     return await this.Address.findByIdAndRemove(id);
   }
 
+  async totalAddresses() {
+    return await this.Address.count();
+  }
+
 }
