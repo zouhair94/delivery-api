@@ -1,6 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Adress } from '../adress/adress.schema';
 
 export type OrderDocument = Order & Document;
 
@@ -18,13 +20,13 @@ export class Order {
   @Prop({ required: true })
   description: string;
 
-  @Field(() => String, { nullable: false })
-  @Prop({ required: true })
-  from: Types.ObjectId;
+  @Field(() => Adress, { nullable: false })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Address' , required: true })
+  from: Adress;
 
-  @Field(() => String, { nullable: false })
-  @Prop({ required: true })
-  to: Types.ObjectId;
+  @Field(() => Adress, { nullable: false })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true })
+  to: Adress;
   
   @Field({ nullable: false })
   @Prop({ required: true })

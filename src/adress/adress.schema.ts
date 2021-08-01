@@ -1,11 +1,18 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
+import { User } from 'src/user/user.schema';
 
 export type AdressDocument = Adress & Document;
+import * as mongoose from 'mongoose';
 
+@InputType('UserIn')
+class UserIn{
+  @Field(() => String)
+  _id: mongoose.Schema.Types.ObjectId
+}
 @ObjectType()
-@Schema()
+@Schema({ versionKey: false, timestamps: true })
 export class Adress {
   @Field(() => String)
   _id: Types.ObjectId;
@@ -30,9 +37,9 @@ export class Adress {
   @Prop({ required: false })
   lng: string;
 
-  @Field(() => String, { nullable: false })
-  @Prop({ required: true })
-  by: Types.ObjectId;
+  @Field(() => User)
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: User.name, required: true })
+  by: UserIn | User;
 }
 
 export const adressSchema = SchemaFactory.createForClass(Adress);

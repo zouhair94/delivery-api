@@ -20,10 +20,16 @@ export class InputUserDto {
   @Field()
   role: string;
 
+  @Field()
+  companyId: string;
+  
+  @Field()
+  credit: number = 30;
+
   @Field({ nullable: true })
   token: string;
-  @Field()
-  createdAt: string = new Date().toISOString();
+  @Field({ nullable: true })
+  createdAt: string;
 }
 
 @InputType()
@@ -45,6 +51,9 @@ export class UpdateUserDto {
 
   @Field({ nullable: true })
   companyId: string;
+
+  @Field({ nullable: true })
+  credit: number;
 
   
 }

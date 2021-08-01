@@ -7,10 +7,11 @@ type User {
   name: String!
   surname: String!
   email: String!
-  password: String!
+  password: String
   phone: String!
   companyId: String!
   role: String!
+  credit: Float
   token: String
   createdAt: String
   updatedAt: String
@@ -23,7 +24,7 @@ type Adress {
   zipCode: String
   lat: String
   lng: String
-  by: String!
+  by: User!
 }
 
 type DeliverySta {
@@ -44,14 +45,29 @@ type Order {
   _id: String!
   title: String!
   description: String!
-  from: String!
-  to: String!
+  from: Adress!
+  to: Adress!
   orderNumber: Float!
   by: String!
 }
 
+input UserInput {
+  _id: String!
+  name: String!
+  surname: String!
+  email: String!
+  password: String
+  phone: String!
+  companyId: String!
+  role: String!
+  credit: Float
+  token: String
+  createdAt: String
+  updatedAt: String
+}
+
 type Query {
-  findAllUser: [User!]!
+  findAllUser(surname: String): [User!]!
   totalUsers: Float!
   findUser(id: String!): User!
   getAllAdress: [Adress!]!
@@ -71,8 +87,9 @@ type Mutation {
   createUser(InputUserDto: InputUserDto!): User!
   login(email: String!, password: String!): String!
   updateUser(data: UpdateUserDto!, id: String!): User!
+  deleteUser(id: String!): User!
   createAddress(addressInput: inputAddress!): Adress!
-  updateAddress(addressInput: inputAddress!, id: String!): Adress!
+  updateAddress(UpdateAddress: UpdateAddress!, id: String!): Adress!
   removeAddress(id: String!): Adress!
   setStatus(StatusInp: StatusInp!): DeliverySta!
   updateStatus(id: String!): DeliverySta!
@@ -89,8 +106,10 @@ input InputUserDto {
   password: String!
   phone: String!
   role: String!
+  companyId: String!
+  credit: Float = 30
   token: String
-  createdAt: String = "2021-07-29T18:17:01.273Z"
+  createdAt: String
 }
 
 input UpdateUserDto {
@@ -100,15 +119,27 @@ input UpdateUserDto {
   phone: String
   role: String
   companyId: String
+  credit: Float
 }
 
 input inputAddress {
   title: String!
   address: String!
-  by: String!
+  by: UserIn
   zipCode: Float
-  lat: Float
-  lng: Float
+  lat: String
+  lng: String
+}
+
+input UserIn {
+  _id: String!
+}
+
+input UpdateAddress {
+  title: String
+  address: String
+  lat: String
+  lng: String
 }
 
 input StatusInp {

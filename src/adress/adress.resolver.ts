@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from '../user/user.guard';
-import { inputAddress } from './adress.dto';
+import { inputAddress, UpdateAddress } from './adress.dto';
 import { Adress } from './adress.schema';
 import { AdressService } from './adress.service';
 
@@ -42,7 +42,7 @@ export class AddressResolver {
   @UseGuards(GqlAuthGuard)
   async updateAddress(
     @Args('id') id: string,
-    @Args('addressInput') data: inputAddress,
+    @Args('UpdateAddress') data: UpdateAddress,
   ) {
     return await this.AddressServ.updateAdress(id, data);
   }

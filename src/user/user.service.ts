@@ -55,6 +55,14 @@ export class UserService {
     }
   }
 
+  async findBySurname(surname) {
+    try {
+      return await this.User.find({ surname : { $regex: '.*'+surname+'.*'} }).exec();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async deleteUser(id){
       try {
           return await this.User.findOneAndDelete(id);

@@ -12,7 +12,7 @@ export class AdressService {
 
   async getAdresses(user) {
     try {
-      return await this.Address.find({ by: user });
+      return await this.Address.find({ by: user }).populate('by');
     } catch (e) {
       new GraphQLError('problem on retrieving addresses!');
     }
@@ -20,7 +20,7 @@ export class AdressService {
 
   async getAllAdresses() {
     try {
-      return await this.Address.find({});
+      return await this.Address.find({}).populate('by');
     } catch (e) {
       new GraphQLError('problem on retrieving addresses!');
     }
@@ -28,7 +28,7 @@ export class AdressService {
 
   async getAdress(id) {
     try {
-      return await this.Address.findById(id);
+      return await this.Address.findById(id).populate('by');
     } catch (e) {
       new GraphQLError('problem on retrieving addresses!');
     }

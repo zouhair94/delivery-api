@@ -25,7 +25,7 @@ export class OrderService {
   }
 
   async getAllOrders() {
-    return await this.Order.find({});
+    return await this.Order.find({}).populate('from','to') ;
   }
 
   async getOrders(id) {

@@ -1,9 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 export type UserDocument = User & Document;
 
+@InputType('UserInput')
 @ObjectType()
 @Schema()
 export class User {
@@ -19,11 +20,11 @@ export class User {
   surname: string;
 
   @Field({ nullable: false })
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true})
   email: string;
 
-  @Field({ nullable: false })
-  @Prop({ required: true })
+  @Field({ nullable: true })
+  @Prop({ required: false })
   password: string;
 
   @Field({ nullable: false })
@@ -31,12 +32,16 @@ export class User {
   phone: string;
   
   @Field({ nullable: false })
-  @Prop({ required: true })
+  @Prop({ required: false })
   companyId: string;
 
   @Field({ nullable: false })
   @Prop({ required: true })
   role: string;
+
+  @Field({ nullable: true })
+  @Prop()
+  credit: number;
 
   @Field({ nullable: true })
   @Prop()

@@ -8,7 +8,9 @@ import { UserService } from './user.service';
 
 @Resolver(() => User)
 export class UserResolver {
+  
   constructor(private readonly user: UserService) {}
+
   @Mutation(() => User)
   async createUser(@Args('InputUserDto') input: InputUserDto) {
     try {
@@ -43,10 +45,19 @@ export class UserResolver {
     }
   }
 
+  @Mutation(() => User)
+  @UseGuards(GqlAuthGuard)
+  async deleteUser(
+    @Args('id') id: string,
+  ){
+    return await this.user.deleteUser(id);
+  }
+
   @Query(() => [User])
   @UseGuards(GqlAuthGuard)
-  async findAllUser() {
+  async findAllUser(@Args({name: 'surname', nullable: true}) surname?: string) {
     try {
+      if (surname) return await this.user.findBySurname(surname);
       return await this.user.findAll();
     } catch (error) {
       console.error(error);
