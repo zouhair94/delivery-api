@@ -8,13 +8,13 @@ import { Adress, AdressDocument } from './adress.schema';
 export class AdressService {
   constructor(
     @InjectModel(Adress.name) private Address: Model<AdressDocument>,
-  ) {}
+  ) { }
 
   async getAdresses(user) {
     try {
       return await this.Address.find({ by: user }).populate('by');
     } catch (e) {
-      new GraphQLError('problem on retrieving addresses!');
+      new GraphQLError(e);
     }
   }
 
@@ -22,7 +22,7 @@ export class AdressService {
     try {
       return await this.Address.find({}).populate('by');
     } catch (e) {
-      new GraphQLError('problem on retrieving addresses!');
+      new GraphQLError(e);
     }
   }
 
@@ -30,7 +30,7 @@ export class AdressService {
     try {
       return await this.Address.findById(id).populate('by');
     } catch (e) {
-      new GraphQLError('problem on retrieving addresses!');
+      new GraphQLError(e);
     }
   }
 
@@ -42,16 +42,24 @@ export class AdressService {
     try {
       return await this.Address.findByIdAndUpdate(id, update);
     } catch (e) {
-      new GraphQLError('problem on updating address!');
+      new GraphQLError(e);
     }
   }
 
   async deleteAdress(id) {
-    return await this.Address.findByIdAndRemove(id);
+    try {
+      return await this.Address.findByIdAndRemove(id);
+    } catch (e) {
+      new GraphQLError(e);
+    }
   }
 
   async totalAddresses() {
-    return await this.Address.count();
+    try {
+      return await this.Address.count();
+    } catch (e) {
+      new GraphQLError(e);
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { User } from 'src/user/user.schema';
+import { User } from '../user/user.schema';
 
 export type AdressDocument = Adress & Document;
 import * as mongoose from 'mongoose';
@@ -40,6 +40,10 @@ export class Adress {
   @Field(() => User)
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: User.name, required: true })
   by: UserIn | User;
+
+  @Field()
+  createdAt: string;
+
 }
 
 export const adressSchema = SchemaFactory.createForClass(Adress);

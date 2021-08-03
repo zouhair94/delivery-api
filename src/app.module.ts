@@ -6,12 +6,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AdressModule } from './adress/adress.module';
 import { DeliveryModule } from './delivery/delivery.module';
-import { DeliveryStatusModule } from './delivery-status/delivery-status.module';
 import { LocationModule } from './location/location.module';
 import { join } from 'path';
 import { LogModule } from './log/log.module';
 import { OrderModule } from './order/order.module';
-import { DelivryStatusResolver } from './delivry-status/delivry-status.resolver';
+
 
 @Module({
   imports: [
@@ -19,17 +18,17 @@ import { DelivryStatusResolver } from './delivry-status/delivry-status.resolver'
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       debug: true,
       playground: true,
+      
     }),
     MongooseModule.forRoot('mongodb://localhost:27019/delivery'),
     UserModule,
     AdressModule,
     DeliveryModule,
-    DeliveryStatusModule,
     LocationModule,
     LogModule,
     OrderModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DelivryStatusResolver],
+  providers: [AppService],
 })
 export class AppModule {}

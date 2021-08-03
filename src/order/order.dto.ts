@@ -1,5 +1,6 @@
 import { Field, InputType, OmitType, PartialType } from '@nestjs/graphql';
 
+
 @InputType()
 export class inputOrderDto {
   @Field({})
@@ -14,8 +15,15 @@ export class inputOrderDto {
   orderNumber?: number;
   @Field()
   by: string;
-  @Field()
-  createdAt?: string;
-  @Field()
-  editedAt?: string;
+  @Field({ nullable: true })
+  delivery: string;
+  @Field(() => String, { nullable: true })
+  status: string = 'inactive';
+}
+@InputType()
+export class UpdateOrderDto {
+  @Field({ nullable: true })
+  delivery: string;
+  @Field(() => String, { nullable: true })
+  status: string = 'inactive';
 }

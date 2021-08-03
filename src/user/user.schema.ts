@@ -6,7 +6,7 @@ export type UserDocument = User & Document;
 
 @InputType('UserInput')
 @ObjectType()
-@Schema()
+@Schema({ versionKey: false, timestamps: true })
 export class User {
   @Field(() => String)
   _id: Types.ObjectId;
@@ -47,13 +47,7 @@ export class User {
   @Prop()
   token: string;
 
-  @Field({ nullable: true })
-  @Prop()
-  createdAt: string;
 
-  @Field({ nullable: true })
-  @Prop()
-  updatedAt: string;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

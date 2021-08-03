@@ -47,6 +47,13 @@ export class UserService {
       console.error(error);
     }
   }
+  async getAllDelivery() {
+    try {
+      return await this.User.find({role: 'delivery'}).exec();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async findAll() {
     try {
       return await this.User.find({}).exec();

@@ -24,16 +24,41 @@ export class OrderService {
     return await this.Order.findByIdAndRemove(id);
   }
 
-  async getAllOrders() {
-    return await this.Order.find({}).populate('from','to') ;
+  async getAllOrders(skip=0) {
+    return await this.Order.find({}).populate('from').populate('to').populate('by').limit(10).skip(skip).exec() ;
+  }
+
+  async findBySurname(surname, skip: number=0) {
+    try {
+      
+      const order = await this.Order.find({
+        by: {$exists: true}
+      })
+      .populate('from')
+      .populate('to')
+      .populate(
+        { 
+          path:'by',
+          match: { surname: { $regex: '.*'+surname+'.*' } }
+          
+
+        })
+      .limit(10)
+      .skip(skip)  
+      .exec();
+      
+      return order;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getOrders(id) {
-    return await this.Order.find({ by: id });
+    return await this.Order.find({ by: id }).populate('from','to');
   }
 
   async getOrder(id) {
-    return await this.Order.findById(id);
+    return await this.Order.findById(id).populate('from','to');
   }
 
   async orderTotal(date) {

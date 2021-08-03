@@ -16,7 +16,7 @@ export class UserResolver {
     try {
       return await this.user.createUser(input);
     } catch (error) {
-      console.error(error);
+      return new GraphQLError(error);
     }
   }
 
@@ -28,7 +28,7 @@ export class UserResolver {
     try {
       return await this.user.login(password, email);
     } catch (error) {
-      return error
+      return new GraphQLError(error);
     }
   }
 
@@ -41,7 +41,7 @@ export class UserResolver {
     try {
       return await this.user.updateUser(id, data)
     } catch (error) {
-      return error
+      return new GraphQLError(error);
     }
   }
 
@@ -60,7 +60,16 @@ export class UserResolver {
       if (surname) return await this.user.findBySurname(surname);
       return await this.user.findAll();
     } catch (error) {
-      console.error(error);
+      return new GraphQLError(error);
+    }
+  }
+  @Query(() => [User])
+  @UseGuards(GqlAuthGuard)
+  async findAllDelivery() {
+    try {
+      return await this.user.getAllDelivery();
+    } catch (error) {
+      return new GraphQLError(error);
     }
   }
 
@@ -70,7 +79,7 @@ export class UserResolver {
     try {
       return await this.user.totalUsers();
     } catch (error) {
-      console.error(error);
+      return new GraphQLError(error);
     }
   }
 
