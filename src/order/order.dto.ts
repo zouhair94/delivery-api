@@ -12,7 +12,7 @@ export class inputOrderDto {
   @Field()
   to: string;
   @Field()
-  orderNumber?: number;
+  orderNumber?: number = Math.floor(1000 + Math.random() * 9000);
   @Field()
   by: string;
   @Field({ nullable: true })
@@ -26,4 +26,6 @@ export class UpdateOrderDto {
   delivery: string;
   @Field(() => String, { nullable: true })
   status: string = 'inactive';
+  @Field({ nullable: true })
+  orderNumber: number;
 }

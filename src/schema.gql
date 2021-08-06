@@ -146,7 +146,7 @@ input inputOrderDto {
   description: String!
   from: String!
   to: String!
-  orderNumber: Float!
+  orderNumber: Float = 1956
   by: String!
   delivery: String
   status: String = "inactive"
@@ -155,4 +155,5 @@ input inputOrderDto {
 input UpdateOrderDto {
   delivery: String
   status: String = "inactive"
+  orderNumber: Float
 }
