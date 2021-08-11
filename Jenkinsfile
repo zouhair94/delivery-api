@@ -4,12 +4,10 @@ pipeline {
 
         stage("build") {
             steps {
-                docker
-                .build('my-build-image')
-                .inside("--volume=/var/run/docker.sock:/var/run/docker.sock") {
+                
                     // The build here
                     sh 'docker --tag delivery_api .'
-                }    
+                 
             }
         }
 
