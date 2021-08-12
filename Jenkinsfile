@@ -13,7 +13,7 @@ pipeline {
 
         stage("pre-deploy") {
             steps {
-                sh 'docker stop delivery-api || true && docker container rm delivery-api || true'
+                sh 'docker stop delivery-api || true && docker container rm delivery-api || true '
                 
             }
         }
