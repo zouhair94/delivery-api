@@ -6,7 +6,7 @@ pipeline {
             steps {
                 
                     // The build here
-                    sh 'docker --tag delivery_api .'
+                    sh 'docker build --tag delivery_api .'
                  
             }
         }
