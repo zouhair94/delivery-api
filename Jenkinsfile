@@ -11,6 +11,12 @@ pipeline {
             }
         }
 
+        stage("pre-deploy") {
+            steps {
+                sh 'docker container rm delivery_api'
+            }
+        }
+
         stage("deploy") {
             steps {
                 sh 'docker run -d --rm -p 3000:3000 --network delivery --name delivery-api delivery_api'
