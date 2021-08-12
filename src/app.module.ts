@@ -20,7 +20,7 @@ import { OrderModule } from './order/order.module';
       playground: true,
       
     }),
-    MongooseModule.forRoot('mongodb://localhost:27019/delivery'),
+    MongooseModule.forRoot('mongodb://root:R007P4ss@delivery-db:27017/delivery?authSource=admin&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false'),
     UserModule,
     AdressModule,
     DeliveryModule,
