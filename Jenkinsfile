@@ -20,7 +20,7 @@ pipeline {
 
         stage("deploy") {
             steps {
-                sh 'docker run -d --rm -p 3000:3000 --network delivery --name delivery-api delivery_api'
+                sh 'docker run -d -p 3000:3000 --network delivery --name delivery-api delivery_api'
             }
         }
 
