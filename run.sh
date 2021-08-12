@@ -1,1 +1,1 @@
-npm run start:prod
+pm2 start ./dist/main.js

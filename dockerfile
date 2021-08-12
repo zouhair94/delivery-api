@@ -8,7 +8,7 @@ RUN apk add --update nodejs npm
 
 RUN npm i -g typescript
 
-RUN npm i -g @nestjs/cli
+RUN npm i -g pm2
 
 RUN npm i
 
@@ -16,7 +16,6 @@ RUN npm uninstall bcrypt
 
 run npm i bcrypt
 
-RUN nest build
 
 EXPOSE 3000/tcp
 #EXPOSE 3000/udp
