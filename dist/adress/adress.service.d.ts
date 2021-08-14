@@ -3,7 +3,7 @@ import { AdressDocument } from './adress.schema';
 export declare class AdressService {
     private Address;
     constructor(Address: Model<AdressDocument>);
-    getAdresses(user: any): Promise<AdressDocument[]>;
+    getAdresses(user: any, skip?: any): Promise<AdressDocument[]>;
     getAllAdresses(): Promise<AdressDocument[]>;
     getAdress(id: any): Promise<AdressDocument>;
     createAddress(data: any): Promise<AdressDocument>;

@@ -22,9 +22,9 @@ let AdressService = class AdressService {
     constructor(Address) {
         this.Address = Address;
     }
-    async getAdresses(user) {
+    async getAdresses(user, skip = null) {
         try {
-            return await this.Address.find({ by: user }).populate('by');
+            return await this.Address.find({ by: user }).populate('by').limit(10).skip(skip);
         }
         catch (e) {
             new GraphQLError_1.GraphQLError(e);
