@@ -60,10 +60,10 @@ let OrderService = class OrderService {
         }
     }
     async getOrders(id) {
-        return await this.Order.find({ by: id }).populate('from', 'to');
+        return await this.Order.find({ by: id }).populate('from').populate('to').populate('by');
     }
     async getOrder(id) {
-        return await this.Order.findById(id).populate('from', 'to');
+        return await this.Order.findById(id).populate('from').populate('to').populate('by');
     }
     async orderTotal(date) {
         return await this.Order.count({ createdAt: { $gte: date } });
