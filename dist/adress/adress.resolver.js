@@ -55,8 +55,9 @@ __decorate([
 __decorate([
     graphql_1.Query(() => [adress_schema_1.Adress]),
     common_1.UseGuards(user_guard_1.GqlAuthGuard),
+    __param(0, graphql_1.Args('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AddressResolver.prototype, "getAddressByUser", null);
 __decorate([

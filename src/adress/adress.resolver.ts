@@ -17,7 +17,7 @@ export class AddressResolver {
 
   @Query(() => [Adress])
   @UseGuards(GqlAuthGuard)
-  async getAddressByUser(id) {
+  async getAddressByUser(@Args('id') id: string) {
     return await this.AddressServ.getAdresses(id);
   }
 
