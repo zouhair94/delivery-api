@@ -7,7 +7,7 @@ import { AdressService } from './adress.service';
 
 @Resolver(() => Adress)
 export class AddressResolver {
-  constructor(private readonly AddressServ: AdressService) {}
+  constructor(private readonly AddressServ: AdressService) { }
 
   @Query(() => [Adress])
   @UseGuards(GqlAuthGuard)
@@ -17,8 +17,10 @@ export class AddressResolver {
 
   @Query(() => [Adress])
   @UseGuards(GqlAuthGuard)
-  async getAddressByUser(@Args('id') id: string) {
-    return await this.AddressServ.getAdresses(id);
+  async getAddressByUser(
+    @Args({ name: 'id', nullable: false }) id: string,
+    @Args({ name: 'skip', nullable: true }) skip?: number) {
+    return await this.AddressServ.getAdresses(id, skip);
   }
 
   @Query(() => Adress)

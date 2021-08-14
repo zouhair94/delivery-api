@@ -26,8 +26,8 @@ let AddressResolver = class AddressResolver {
     async getAllAdress() {
         return await this.AddressServ.getAllAdresses();
     }
-    async getAddressByUser(id) {
-        return await this.AddressServ.getAdresses(id);
+    async getAddressByUser(id, skip) {
+        return await this.AddressServ.getAdresses(id, skip);
     }
     async getAddress(id) {
         return await this.AddressServ.getAdress(id);
@@ -55,9 +55,10 @@ __decorate([
 __decorate([
     graphql_1.Query(() => [adress_schema_1.Adress]),
     common_1.UseGuards(user_guard_1.GqlAuthGuard),
-    __param(0, graphql_1.Args('id')),
+    __param(0, graphql_1.Args({ name: 'id', nullable: false })),
+    __param(1, graphql_1.Args({ name: 'skip', nullable: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Number]),
     __metadata("design:returntype", Promise)
 ], AddressResolver.prototype, "getAddressByUser", null);
 __decorate([
